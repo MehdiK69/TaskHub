@@ -1,6 +1,7 @@
 package models;
 import enums.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
 /** Classe tache qui va permettre de créer un objet Tache et de le manipuler
  * @author mehdi.khattab
@@ -103,12 +104,21 @@ public class Tache {
         this.categorie = categorie;
     }
 
+
+
     public boolean getTerminee() {
         return terminee;
     }
 
     public void setTerminee(boolean terminee) {
         this.terminee = terminee;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Tache tache = (Tache) o;
+        return getId() == tache.getId() && Objects.equals(getTitre(), tache.getTitre()) && Objects.equals(getDescription(), tache.getDescription()) && getPriorite() == tache.getPriorite();
     }
 
     @Override
