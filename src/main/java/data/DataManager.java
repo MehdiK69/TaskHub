@@ -3,6 +3,7 @@ import java.io.*;
 
 import enums.Priorite;
 import enums.Statut;
+import models.Projet;
 import models.Tache;
 import services.*;
 
@@ -12,14 +13,15 @@ import java.util.ArrayList;
 
 public class DataManager {
 
-    private static final String FICHIER_TACHES_DEFAUT = "data/taches.txt";
+    private static final String FICHIER_TACHES = "data/taches.txt";
+    private static final String FICHIER_PROJETS = "data/projets.txt";
 
     public static void sauvegarderTaches(ArrayList<Tache> taches) throws IOException {
         File dossier = new File("data");
         if (!dossier.exists()){
             dossier.mkdir();  // Créer le dossier
         }
-        FileWriter fw = new FileWriter(FICHIER_TACHES_DEFAUT);
+        FileWriter fw = new FileWriter(FICHIER_TACHES);
         BufferedWriter bw = new BufferedWriter(fw);
         for (Tache t : taches){
             String ligne = t.getId() + ";" +
@@ -40,7 +42,7 @@ public class DataManager {
     }
 
     public static ArrayList<Tache> chargerTaches() throws IOException {
-        File fichier = new File(FICHIER_TACHES_DEFAUT);
+        File fichier = new File(FICHIER_TACHES);
         if (!fichier.exists()) {
             return new ArrayList<>();  // Retourner liste vide si pas de fichier
         }
@@ -74,5 +76,50 @@ public class DataManager {
         br.close();
         fr.close();
         return taches;
+    }
+
+    public static void sauvegarderProjets(ArrayList<Projet> projets) throws IOException {
+        File dossier = new File("data");
+        if (!dossier.exists()){
+            dossier.mkdir();
+        }
+        FileWriter fw = new FileWriter("data/projets.txt");
+        BufferedWriter bw = new BufferedWriter(fw);
+        for (Projet p : projets){
+            String ligne = p.getId()+ ";" +
+                    p.getNom()+ ";" +
+                    p.getDescription()+ ";" +
+                    p.getCouleur()+ ";" +
+                    p.getDateCreation();
+            bw.write(ligne);
+            bw.newLine();
+        }
+        bw.close();
+        fw.close();
+    }
+
+    public static ArrayList<Projet> chargerProjets() throws IOException {
+        File fichier = new File(FICHIER_PROJETS);
+        if (!fichier.exists()) {
+            return new ArrayList<>();  // Retourner liste vide si pas de fichier
+        }
+        FileReader fr = new FileReader(fichier);
+        BufferedReader br = new BufferedReader(fr);
+        ArrayList<Projet> projets = new ArrayList<>();
+        String ligne;
+        while ((ligne = br.readLine()) != null) {
+            String[] parties = ligne.split(";");
+            int id = Integer.parseInt(parties[0]);
+            String titre = parties[1];
+            String description = parties[2];
+            String couleur = parties[3];
+            LocalDate dateCreation = LocalDate.parse(parties[4]);
+
+            Projet p = new Projet(id, titre, description, couleur, dateCreation);
+            projets.add(p);
+        }
+        br.close();
+        fr.close();
+        return projets;
     }
 }
