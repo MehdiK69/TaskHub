@@ -5,6 +5,7 @@ import services.ProjetService;
 import data.DataManager;
 import enums.Priorite;
 import enums.Statut;
+import views.FenetrePrincipale;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -12,6 +13,8 @@ import java.util.ArrayList;
 
 public class Test {
     public static void main(String[] args){
+
+        FenetrePrincipale fenetrePrincipale = new FenetrePrincipale();
 
         System.out.println("=== TASKHUB - Démarrage ===\n");
 
@@ -185,4 +188,6 @@ public class Test {
             }
             return maxId + 1;
         }
+
+
 }
