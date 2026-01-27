@@ -1,6 +1,7 @@
 package models;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Projet {
 
@@ -36,6 +37,18 @@ public class Projet {
 
     public LocalDate getDateCreation() {
         return dateCreation;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Projet projet = (Projet) o;
+        return getId() == projet.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId());
     }
 
     @Override

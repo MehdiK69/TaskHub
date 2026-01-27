@@ -12,16 +12,11 @@ public class TacheService {
 
     public void ajouterTache(Tache tache){
         taches.add(tache);
-        System.out.println("✓ Tâche ajoutée : " + tache.getTitre());
+        //System.out.println("✓ Tâche ajoutée : " + tache.getTitre());
     }
 
     public boolean tacheExiste(Tache tache){
-        for (Tache t : taches) {
-            if(t == tache){
-                return true;
-            }
-        }
-        return false;
+        return taches.contains(tache);
     }
 
     // Lister toutes les tâches
@@ -30,16 +25,13 @@ public class TacheService {
     }
 
     public void afficherTaches() {
-        if (taches.isEmpty()) {
-            System.out.println("Aucune tâche.");
-            return;
-        }
+        if (taches.isEmpty()) throw new NullPointerException("Aucune tache");
 
-        System.out.println("\n=== LISTE DES TÂCHES ===");
+        //System.out.println("\n=== LISTE DES TÂCHES ===");
         for (Tache t : taches) {
             System.out.println(t);
         }
-        System.out.println("========================\n");
+        //System.out.println("========================\n");
     }
 
     // Trouver une tâche par son ID
@@ -49,7 +41,7 @@ public class TacheService {
                 return t;
             }
         }
-        System.out.println("Cette tâche n'existe pas.");
+        //System.out.println("Cette tâche n'existe pas.");
         return null;
     }
 
@@ -58,14 +50,21 @@ public class TacheService {
         Tache tache = trouverTacheParId(id);
         if(tache != null){
             tache.setTerminee(true);
-            System.out.println("✓ Tâche #" + id + " marquée comme terminée");
+            /*System.out.println("✓ Tâche #" + id + " marquée comme terminée");
         } else {
-            System.out.println("✗ Tâche #" + id + " non trouvée");
-        }
+            System.out.println("✗ Tâche #" + id + " introuvable");
+        }*/
     }
+        }
 
     public void supprimerTache(Tache tache){
         taches.remove(tache);
+        /*boolean supprimee = taches.remove(tache);
+        if (supprimee) {
+            System.out.println("✓ Tâche supprimée : " + tache.getTitre());
+        } else {
+            System.out.println("✗ Tâche introuvable");
+        }*/
     }
 
     // Obtenir le nombre total de tâches
