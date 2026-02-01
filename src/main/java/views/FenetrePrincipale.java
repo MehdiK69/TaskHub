@@ -26,7 +26,7 @@ public class FenetrePrincipale extends JFrame {
         projetService = new ProjetService();
         chargerDonnees();
         construireFenetrePrincipale();
-        rafraichirTable();  // ←
+        rafraichirTable();
     }
 
     public void construireFenetrePrincipale() {
@@ -106,8 +106,6 @@ public class FenetrePrincipale extends JFrame {
         tableModel.setRowCount(0);
         ArrayList<Tache> taches = tacheService.listerTaches();
         for (Tache t : taches) {
-            // Pour chaque tâche, on va créer une ligne
-            taches.add(t);
             if (t.getIdProjet() == 0) {
                 nomProjet = "Sans projet";
             } else {
@@ -128,8 +126,6 @@ public class FenetrePrincipale extends JFrame {
             };
             tableModel.addRow(ligne);
         }
-
-
         // Remplir le tableModel
     }
 
