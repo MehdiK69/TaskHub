@@ -34,3 +34,10 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# Fichiers de tâches personnels
+FICHIER_TACHES
+FICHIER_TACHES_DEFAUT
+
+# Dossier de données (trop lourd ou local)
+data/
